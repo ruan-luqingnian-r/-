@@ -22,6 +22,7 @@ public class HashTableDemo{
             System.out.println("add: 添加雇员");
             System.out.println("list: 显示雇员");
             System.out.println("find: 查找雇员");
+            System.out.println("delete: 删除雇员");
             System.out.println("exit: 退出系统");
             key = scanner.next();
             switch (key){
@@ -40,7 +41,11 @@ public class HashTableDemo{
                     System.out.println("请输入id");
                     int i = scanner.nextInt();
                     hashTable.findEmpById(i);
-
+                    break;
+                case "delete":
+                    System.out.println("请输入id");
+                    int nextInt = scanner.nextInt();
+                    hashTable.deleteById(nextInt);
                     break;
                 case "exit":
                     scanner.close();
@@ -150,6 +155,22 @@ class EmpLinkList{
         }
         return curEmp;
     }
+    /**
+     * 根据id删除用户信息
+     */
+    public void deleteById(int id){
+        if (head == null){
+            System.out.println("链表为空");
+        }
+        //创建辅助节点
+        Emp curEmp = head;
+        Emp emp = findEmpById(id);
+        if (emp == null){
+            System.out.println("无此节点");
+        }else {
+            head = emp.next;
+        }
+    }
 }
 //创建哈希表管理多条连
 class HashTable{
@@ -197,6 +218,14 @@ class HashTable{
         }else {
             System.out.println("未找到");
         }
+    }
+    /**
+     * 删除成员
+     */
+    public void deleteById(int id){
+        int hashFun = hashFun(id);
+        empLinkLists[hashFun].deleteById(id);
+        System.out.println("删除成功");
     }
 
 
