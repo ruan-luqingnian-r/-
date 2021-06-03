@@ -26,15 +26,15 @@ public class BinaryTreeDemo {
         node3.setRight(node4);
 
         binaryTree.setRoot(root);
-        //测试
-        System.out.println("前序遍历");
-        binaryTree.preOrder();
-        //测试
-        System.out.println("中序遍历");
-        binaryTree.infixOrder();
-        //测试
-        System.out.println("后序遍历");
-        binaryTree.postOrder();
+//        //测试
+//        System.out.println("前序遍历");
+//        binaryTree.preOrder();
+//        //测试
+//        System.out.println("中序遍历");
+//        binaryTree.infixOrder();
+//        //测试
+//        System.out.println("后序遍历");
+//        binaryTree.postOrder();
         //前序查找
         //前序遍历的次数 ： 4
 //         System.out.println("前序遍历方式~~~");
@@ -51,13 +51,18 @@ public class BinaryTreeDemo {
 //        } else {
 //            System.out.printf("没有找到 no = %d 的英雄", 5);
 //        }
-        System.out.println("后序遍历方式~~~");
-        HeroNode resNode = binaryTree.postOrderSearch(5);
-        if (resNode != null) {
-            System.out.printf("找到了， 信息为 no=%d name=%s", resNode.getNo(), resNode.getName());
-        } else {
-            System.out.printf("没有找到 no = %d 的英雄", 5);
-        }
+//        System.out.println("后序遍历方式~~~");
+//        HeroNode resNode = binaryTree.postOrderSearch(5);
+//        if (resNode != null) {
+//            System.out.printf("找到了， 信息为 no=%d name=%s", resNode.getNo(), resNode.getName());
+//        } else {
+//            System.out.printf("没有找到 no = %d 的英雄", 5);
+//        }
+        System.out.println("删除前，前序遍历");
+        binaryTree.preOrder();
+        binaryTree.delNode(3);
+        System.out.println("删除后，前序遍历");
+        binaryTree.preOrder();
     }
 
 }
@@ -211,6 +216,30 @@ class HeroNode{
         }
         return resHeroNode;
     }
+    //删除节点
+    //1.如果删除的节点是叶子节点， 则删除该节点
+    //2.如果删除的节点是非叶子节点， 则删除该子树
+    public void delNode(int no){
+        //1.判读左子节点是否是要删除的
+        if (this.left != null && this.left.no == no){
+            this.left = null;
+            return;
+        }
+        //2.判断右子节点是否要删除
+        if (this.right != null && this.right.no == no){
+            this.right = null;
+            return;
+        }
+        //3.向左子节点进行递归删除
+        if (this.left != null){
+            this.left.delNode(no);
+        }
+        //4.向右子节点进行递归删除
+        if (this.right != null){
+            this.right.delNode(no);
+        }
+
+    }
 }
 //创建二叉树
 class BinaryTree{
@@ -267,4 +296,18 @@ class BinaryTree{
             return null;
         }
     }
+    public void delNode(int no){
+        if (root != null){
+            //如果只有一个root
+            if (root.getNo() == no){
+                root = null;
+            }else {
+                //递归删除
+                root.delNode(no);
+            }
+        }else {
+            System.out.println("空树无法删除");
+        }
+    }
+
 }
