@@ -13,7 +13,12 @@ public class ArrBinaryTreeDemo {
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,5,6,7};
         ArrBinaryTree arrBinaryTree = new ArrBinaryTree(arr);
+        System.out.println("前序遍历");
         arrBinaryTree.preOrder();
+        System.out.println("中序遍历");
+        arrBinaryTree.infixOrder(0);
+        System.out.println("后续遍历");
+        arrBinaryTree.postOrder(0);
     }
 }
 //编写一个ArrBinaryTree,实现顺序存储二叉树
@@ -43,6 +48,40 @@ class ArrBinaryTree{
             preOrder(2 * index + 2);
         }
 
+    }
+    //中序遍历
+    public void infixOrder(int index){
+        if (arr == null || arr.length == 0){
+            System.out.println("数组为空无法遍历");
+            return;
+        }
+        //向左递归
+        if ((2 * index + 1) < arr.length){
+            infixOrder(2 * index + 1);
+        }
+        //打印当前节点
+        System.out.println(arr[index]);
+        //向右递归
+        if ((2 * index + 2) < arr.length){
+            infixOrder(2 * index + 2);
+        }
+    }
+    //后续遍历
+    public void postOrder(int index){
+        if (arr.length == 0 || arr == null){
+            System.out.println("数组为空");
+            return;
+        }
+        //向左递归
+        if ((2 * index + 1) < arr.length){
+            postOrder(2 * index + 1);
+        }
+        //向右递归
+        if ((2 * index + 2) < arr.length){
+            postOrder(2 * index + 2);
+        }
+        //打印当前节点
+        System.out.println(arr[index]);
     }
     //重载preOrder()
     public void preOrder(){
