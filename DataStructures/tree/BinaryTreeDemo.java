@@ -72,6 +72,8 @@ class HeroNode{
     private String name;//名字
     private HeroNode left;//左节点默认为空
     private HeroNode right;//右节点默认为空
+    private int leftType;//如果是0则指向左子树，1则指向前驱节点
+    private int rightType;
     //创建构造器
     public HeroNode(int no,String name){
         this.no = no;
@@ -108,6 +110,22 @@ class HeroNode{
 
     public void setRight(HeroNode right) {
         this.right = right;
+    }
+
+    public int getLeftType() {
+        return leftType;
+    }
+
+    public void setLeftType(int leftType) {
+        this.leftType = leftType;
+    }
+
+    public int getRightType() {
+        return rightType;
+    }
+
+    public void setRightType(int rightType) {
+        this.rightType = rightType;
     }
 
     @Override
@@ -244,6 +262,8 @@ class HeroNode{
 //创建二叉树
 class BinaryTree{
     private HeroNode root;//创建根结点
+    //创建前驱节点
+    private HeroNode pre = null;
 
     public void setRoot(HeroNode root) {
         this.root = root;
@@ -296,6 +316,7 @@ class BinaryTree{
             return null;
         }
     }
+    //删除节点
     public void delNode(int no){
         if (root != null){
             //如果只有一个root
@@ -309,5 +330,45 @@ class BinaryTree{
             System.out.println("空树无法删除");
         }
     }
+    //对二叉树线索化的方法
+    public void threadedNodes(HeroNode node){
+        if (node == null){
+            return;
+        }
+        //1.先处理左子树
+        threadedNodes(node.getLeft());
+        if (node.getLeft() == null){
+            node.setLeft(pre);
+            node.setLeftType(1);
+        }
+        if (pre != null && pre.getRight() == null){
+            pre.setRight(node);
+            pre.setRightType(1);
+        }
+        pre = node;//每处理一个节点后让当前节点是下一个的后续节点
+
+        threadedNodes(node.getRight());
+
+    }
+    //遍历线索化二叉树的方法
+    public void list(){
+        //创建辅助节点
+        HeroNode node = root;
+        while (node != null){
+            while (node.getLeftType() == 0){
+                node = node.getLeft();
+            }
+            //打印当前节点
+            System.out.println(node);
+            while (node.getRightType() == 1){
+                node = node.getRight();
+                System.out.println(node);
+            }
+            //替换节点
+            node = node.getRight();
+        }
+
+    }
+
 
 }
