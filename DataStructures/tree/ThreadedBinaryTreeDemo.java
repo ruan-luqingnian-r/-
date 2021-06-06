@@ -33,6 +33,9 @@ public class ThreadedBinaryTreeDemo {
         //测试以10为测试
         HeroNode leftNode = node5.getLeft();
         System.out.println(leftNode.toString());
+        //当线索化二叉树后无法使用之前的遍历方法
+        System.out.println("使用线索化方式遍历二叉树");
+        binaryTree.list();
     }
 }
 
