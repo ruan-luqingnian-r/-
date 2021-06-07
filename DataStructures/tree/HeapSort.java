@@ -1,6 +1,8 @@
 package DataStructures.tree;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * @PackgeName: DataStructures.tree
@@ -13,8 +15,25 @@ import java.util.Arrays;
  */
 public class HeapSort {
     public static void main(String[] args) {
-        int[] arr = {4,6,8,5,9};
-        heapSort(arr);
+//        int[] arr = {4,6,8,5,9};
+//        heapSort(arr);
+        //测试排序速度
+        int[] arr = new int[8000000];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) (Math.random() * 800000);//[0,8000000)的随机数
+        }
+
+        Date date1 = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String date1Ser = simpleDateFormat.format(date1);
+        System.out.println("排序前的时间是:"+date1Ser);
+        //System.out.println(Arrays.toString(arr));
+       heapSort(arr);
+        //System.out.println(Arrays.toString(sort));
+        Date date2 = new Date();
+        String date2Ser = simpleDateFormat.format(date2);
+        System.out.println("排序后的时间是:"+date2Ser);
     }
     /**
      * 堆排序
