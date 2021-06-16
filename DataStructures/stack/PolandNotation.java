@@ -22,6 +22,14 @@ public class PolandNotation {
         int calculate = calculate(reversePolishNotation);
         System.out.println("计算结果为:"+calculate);
 
+
+
+
+
+
+
+
+
     }
     //将逆波兰表达式的数据写入列表中
     public static List<String> getListString(String suffixExpression){
