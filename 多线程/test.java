@@ -22,5 +22,13 @@ public class test {
                }
            }
         }).start();
+
+        new Thread(()->{
+            synchronized (HAIR_B){
+                synchronized (HAIR_A){
+                    System.out.println("B成功的薅到A的头发");
+                }
+            }
+        }).start();
     }
 }
