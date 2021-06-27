@@ -17,6 +17,11 @@ public class test {
     public static void main(String[] args) {
         new Thread(()->{
            synchronized (HAIR_A){
+               try {
+                   Thread.sleep(50L);
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
                synchronized (HAIR_B){
                    System.out.println("A成功的薅到B的头发");
                }
