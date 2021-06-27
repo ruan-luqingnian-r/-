@@ -10,12 +10,17 @@ package 多线程;
  * @Description:
  */
 public class test {
-
+    //死锁
+    private static final Object HAIR_A = new Object();
+    private static final Object HAIR_B = new Object();
 
     public static void main(String[] args) {
-
-        /**
-         * 死锁
-         */
+        new Thread(()->{
+           synchronized (HAIR_A){
+               synchronized (HAIR_B){
+                   System.out.println("A成功的薅到B的头发");
+               }
+           }
+        }).start();
     }
 }
