@@ -13,15 +13,15 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
     private static final long serialVersionUID = 1l;
-    private String username;
+    private String userName;
     private String pwd;
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
     public String getPwd() {
@@ -32,8 +32,8 @@ public class User implements Serializable {
         this.pwd = pwd;
     }
 
-    public User(String username, String pwd) {
-        this.username = username;
+    public User(String userName, String pwd) {
+        this.userName = userName;
         this.pwd = pwd;
     }
 }
