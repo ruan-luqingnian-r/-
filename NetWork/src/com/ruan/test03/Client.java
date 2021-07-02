@@ -49,15 +49,8 @@ public class Client {
         } finally {
             //关闭流
             try {
-                if (outputStream != null){
-                    outputStream.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                if (objectOutputStream != null) {
-                    objectOutputStream.close();
+                if (dataInputStream != null) {
+                    dataInputStream.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -70,8 +63,15 @@ public class Client {
                 e.printStackTrace();
             }
             try {
-                if (dataInputStream != null) {
-                    dataInputStream.close();
+                if (objectOutputStream != null) {
+                    objectOutputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (outputStream != null){
+                    outputStream.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
