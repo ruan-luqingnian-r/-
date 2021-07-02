@@ -18,27 +18,37 @@ import java.util.Scanner;
  * @Description: 接收方
  */
 public class Receive {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         System.out.println("====接收方上线====");
         //准备套接字,指定接收端口
-
-        while (true) {
-            DatagramSocket datagramSocket = new DatagramSocket(9999);
+        DatagramSocket datagramSocket = null;
+        try {
+            datagramSocket = new DatagramSocket(9999);
             Scanner scanner = new Scanner(System.in);
-            //创建一个空数据包用于接收数据
-            byte[] bytes = new byte[1024];
-            DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length);//空数据包
-            //接收数据,并将数据写入数据包
-            datagramSocket.receive(datagramPacket);
-            //读取数据
-            byte[] data = datagramPacket.getData();
-            String s = new String(data, 0, datagramPacket.getLength());
-            System.out.println("发送机：" + s);
-            //回复信息
-            String str = scanner.nextLine();
-            byte[] bytes1 = str.getBytes();
-            DatagramPacket localhost = new DatagramPacket(bytes1, bytes1.length, InetAddress.getByName("localhost"), 8888);
-            datagramSocket.send(localhost);
+            while (true){
+                //创建一个空数据包用于接收数据
+                byte[] bytes = new byte[1024];
+                DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length);//空数据包
+                //接收数据,并将数据写入数据包
+                datagramSocket.receive(datagramPacket);
+                //读取数据
+                byte[] data = datagramPacket.getData();
+                String s = new String(data, 0, datagramPacket.getLength());
+                System.out.println("发送机：" + s);
+                if (s.equals("byebye")){
+                    System.out.println("服务下线");
+                    break;
+                }
+                //回复信息
+                System.out.print("接收机:");
+                String str = scanner.nextLine();
+                byte[] bytes1 = str.getBytes();
+                DatagramPacket localhost = new DatagramPacket(bytes1, bytes1.length, InetAddress.getByName("localhost"), 8888);
+                datagramSocket.send(localhost);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
             datagramSocket.close();
         }
     }

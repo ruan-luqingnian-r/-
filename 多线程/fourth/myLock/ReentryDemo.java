@@ -1,6 +1,7 @@
 package 多线程.fourth.myLock;
 
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @PackgeName: 多线程.fourth.myLock
@@ -28,5 +29,6 @@ public class ReentryDemo {
     public static void main(String[] args) {
         ReentryDemo reentryDemo = new ReentryDemo();
         reentryDemo.methodA();
+
     }
 }
