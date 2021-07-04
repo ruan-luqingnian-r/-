@@ -12,7 +12,7 @@ public class Medium {
     /**
      * 接收生产数据
      */
-    public void put(){
+    public synchronized void put(){
         //判断当前库存是否已经是最大容量
         if (num < TOTAL){
             //如果不是，生产完成后，通知消费者进行消费
@@ -32,7 +32,7 @@ public class Medium {
     /**
      * 获取消费数据
      */
-    public void take(){
+    public synchronized void take(){
         //判断当前库存
         if (num > 0){
             //如果充足，再消费完成后通过之通知生产者生产进行生产
