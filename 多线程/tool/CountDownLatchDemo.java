@@ -23,7 +23,8 @@ public class CountDownLatchDemo {
             int finalI = i;
             new Thread(()->{
                 try {
-                    Thread.sleep(finalI * 8000L);
+                    Thread.sleep(finalI * 1000L);
+                    System.out.println(Thread.currentThread().getName() + "到达终点");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {
