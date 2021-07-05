@@ -14,8 +14,10 @@ import java.util.Scanner;
  * @Description: 发送方
  */
 public class Send {
-    public static void main(String[] args){
+    public static void main(String[] args) throws UnknownHostException {
         System.out.println("====发送方上线=====");
+        InetAddress byName = InetAddress.getByName("DESKTOP-11CEJBP");
+        System.out.println(byName);
         //1.准备套接字，指定发送的端口号
         DatagramSocket datagramSocket = null;
         try {
@@ -33,7 +35,7 @@ public class Send {
                  * 3.封装接收方的ip
                  * 4.指定接收方的端口号
                  */
-                DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length, InetAddress.getByName("localhost"), 9999);//数据包
+                DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length, InetAddress.getByName("192.168.0.103"), 8888);//数据包
                 //发送
                 datagramSocket.send(datagramPacket);
                 if (str.equals("beybey")){
