@@ -8,6 +8,7 @@ import java.util.concurrent.CyclicBarrier;
  */
 public class TestCyclicBarrier {
     public static void main(String[] args) {
+
         CyclicBarrier cyclicBarrier = new CyclicBarrier(20,()->{
             System.out.println("人满20 发车");
         });
