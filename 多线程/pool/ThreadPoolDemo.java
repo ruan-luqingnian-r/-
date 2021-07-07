@@ -14,13 +14,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadPoolDemo {
     public static void main(String[] args) {
-        LinkedBlockingQueue<Runnable> runnables = new LinkedBlockingQueue<>(10);
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(20,20,3000L,TimeUnit.SECONDS,runnables);
-
+        LinkedBlockingQueue<Runnable> runnables = new LinkedBlockingQueue<>();
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 20, 3, TimeUnit.SECONDS, runnables);
         for (int i = 0; i < 100; i++) {
-            Future<?> submit = threadPoolExecutor.submit(() -> {
+            threadPoolExecutor.submit(()->{
                 try {
-                    Thread.sleep(1000L);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
