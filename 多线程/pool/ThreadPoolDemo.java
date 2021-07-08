@@ -12,7 +12,7 @@ import java.util.concurrent.*;
 public class ThreadPoolDemo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         LinkedBlockingQueue<Runnable> runnables = new LinkedBlockingQueue<>();
-      /*  for (int i = 0; i < 100; i++) {
+      /*for (int i = 0; i < 100; i++) {
             runnables.put(()->{
                 System.out.println(Thread.currentThread().getName());
             });
