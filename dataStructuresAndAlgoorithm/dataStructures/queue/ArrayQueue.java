@@ -65,6 +65,11 @@ class Queue{
     }
     //遍历队列
     public void list(){
+        //先判断队列是否为空
+        if (isNull()){
+            System.out.println("队列为空，无数据");
+            return;
+        }
 
     }
 
