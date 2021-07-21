@@ -1,5 +1,7 @@
 package dataStructuresAndAlgoorithm.dataStructures.queue;
 
+import java.util.Scanner;
+
 /**
  * @Author: ruan
  * Date: 2021/7/21 10:03
@@ -7,6 +9,45 @@ package dataStructuresAndAlgoorithm.dataStructures.queue;
  * 队列特点先入先出
  */
 public class ArrayQueue {
+    public static void main(String[] args) {
+        //测试队列功能
+        boolean loop = true;
+        System.out.println("=====功能测试=====");
+        Queue queue = new Queue(3);
+        Scanner scanner = new Scanner(System.in);
+        char key;
+        //弹出菜单
+        while (loop){
+            System.out.println("s(show): 显示队列");
+            System.out.println("e(exit): 退出程序");
+            System.out.println("a(add): 添加数据到队列");
+            System.out.println("g(get): 从队列取出数据");
+            System.out.println("h(head): 查看队列头的数据");
+            System.out.print("请操作：");
+            key = scanner.next().charAt(0);
+            switch (key){
+                case 's' : queue.list();
+                    break;
+                case 'e' :
+                    System.out.println("==退出程序==");
+                    loop = false;
+                    break;
+                case 'a' :
+                    System.out.print("请输入:");
+                    int value = scanner.nextInt();
+                    queue.add(value);
+                    break;
+                case 'g' : int i = queue.pop();
+                    System.out.println("===取出的数据是===");
+                    System.out.println(i);
+                    break;
+                case 'h' : int j = queue.get();
+                    System.out.println("===队头的数据是===");
+                    System.out.println(j);
+                    break;
+            }
+        }
+    }
 
 }
 //
@@ -33,7 +74,7 @@ class Queue{
     }
     //是否空队列
     public boolean isNull(){
-        return front == -1;
+        return rear == front;
     }
     //入队列
     public void add(int number){
@@ -69,6 +110,10 @@ class Queue{
         if (isNull()){
             System.out.println("队列为空，无数据");
             return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print("["+arr[i]+"]   ");
+            System.out.println();
         }
 
     }
