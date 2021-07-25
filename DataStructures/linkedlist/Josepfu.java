@@ -16,18 +16,6 @@ class Boy{
         this.no = no;
     }
 
-
-
-
-
-
-
-
-
-
-
-    
-
     public void setNo(int no) {
         this.no = no;
     }
