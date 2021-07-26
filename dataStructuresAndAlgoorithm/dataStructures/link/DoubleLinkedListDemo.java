@@ -15,7 +15,7 @@ public class DoubleLinkedListDemo {
         DoubleNode node4 = new DoubleNode(4, "李");
         //创建链表
         DoubleLinkedList doubleLinkedList = new DoubleLinkedList();
-        doubleLinkedList.ulAdd(node1);
+        /*doubleLinkedList.ulAdd(node1);
         doubleLinkedList.ulAdd(node2);
         doubleLinkedList.ulAdd(node3);
         doubleLinkedList.ulAdd(node4);
@@ -26,6 +26,11 @@ public class DoubleLinkedListDemo {
         doubleLinkedList.list();
         doubleLinkedList.upDate(4,"哈哈");
         System.out.println("=========");
+        doubleLinkedList.list();*/
+        doubleLinkedList.olAdd(node2);
+        doubleLinkedList.olAdd(node1);
+        doubleLinkedList.olAdd(node4);
+        doubleLinkedList.olAdd(node3);
         doubleLinkedList.list();
     }
 }
@@ -142,6 +147,38 @@ class DoubleLinkedList{
         }
     }
     /**
-     * 添加链表
+     * 添加链表(有序添加)
      */
+    public void olAdd(DoubleNode newNode){
+        DoubleNode temp = head;
+        boolean flag = false;
+        boolean flag1 = false;
+        while (true){
+            if (temp.nextNode == null){
+                //在尾部插入
+                flag1 = true;
+                break;
+            }
+            if (temp.nextNode.id > newNode.id ){
+                flag = true;
+                break;
+            }
+            if (temp.nextNode.id == newNode.id){
+
+                break;
+            }
+            temp = temp.nextNode;
+        }
+        if (flag1){
+            temp.nextNode = newNode;
+            newNode.preNode = temp;
+        }else if (flag){
+            newNode.nextNode = temp.nextNode;
+            temp.nextNode.preNode = newNode;
+            temp.nextNode = newNode;
+            newNode.preNode = temp;
+        }else {
+            System.out.println("节点存在");
+        }
+    }
 }
