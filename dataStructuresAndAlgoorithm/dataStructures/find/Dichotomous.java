@@ -1,4 +1,4 @@
-package dataStructuresAndAlgoorithm.dataStructures.search;
+package dataStructuresAndAlgoorithm.dataStructures.find;
 
 import java.util.ArrayList;
 import java.util.List;
