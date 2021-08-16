@@ -10,24 +10,26 @@ import java.util.Arrays;
  */
 public class SelectSort {
     public static void main(String[] args) {
-        int[] arr = {213,21,32,13214,2112,312312,312,32,31,312,312,22,2,2,2,2,};
-        sort(arr);
-        System.out.println(Arrays.toString(arr));
+        int[] arr = {12,31,42,3,42,123,42,324,45,25,6,325,643,4,32545,65,34,21,12,3};
+        int[] sort = sort(arr);
+        System.out.println(Arrays.toString(sort));
     }
-    public static void sort(int[] arr){
-        int temp = 0;
+    public static int[] sort(int[] arr){
         for (int i = 0; i < arr.length; i++) {
-            int minPos = i;
+            int min = i;
+            int minValue = arr[min];
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[minPos] > arr[j]){
-                    minPos = j;
+                //找到最小的值
+                if (minValue > arr[j]){
+                    min = j;
+                    minValue  = arr[j];
                 }
             }
-            temp = arr[i];
-            arr[i] = arr[minPos];
-            arr[minPos] = temp;
-
+            if (min != i){
+                arr[min] = arr[i];
+                arr[i] = minValue;
+            }
         }
-
+        return arr;
     }
 }
