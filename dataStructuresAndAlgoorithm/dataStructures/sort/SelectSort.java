@@ -14,6 +14,13 @@ public class SelectSort {
         int[] sort = sort(arr);
         System.out.println(Arrays.toString(sort));
     }
+
+    /**
+     * 选着排序
+     * @param arr 待排数组
+     * @return 排序好的数组
+     * 时间复杂度O(n^2)
+     */
     public static int[] sort(int[] arr){
         for (int i = 0; i < arr.length; i++) {
             int min = i;
