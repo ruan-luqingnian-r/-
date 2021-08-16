@@ -19,27 +19,16 @@ public class BubbleSort {
      * 冒泡排序
      * @param arr 待排序数组
      * @return 排序好的数组
-     * 时间复杂度O(n^2)
      */
     public static int[] sort(int[] arr){
         int temp = 0;
-        //判断是否进行交换
-        boolean flag = false;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length - 1 - i; j++) {
                 if (arr[j] > arr[j+1]){
-                    flag = true;
                     temp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
                 }
-            }
-            if (!flag){
-                //如果没有交换则直接跳出当前循环
-                break;
-            }else {
-                //重置flag
-                flag = false;
             }
         }
         return arr;
