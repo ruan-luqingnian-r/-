@@ -16,8 +16,10 @@ public class Demo {
     }
 
     public static void swap(int a,int b){
-        a = a + b;
-        b = a - b;
-        a = a - b;
+        System.out.printf("a=%d,b=%d",a,b);
+        a = a^b;
+        b = b^a;
+        a = a^b;
+        System.out.printf("\na=%d,b=%d",a,b);
     }
 }
