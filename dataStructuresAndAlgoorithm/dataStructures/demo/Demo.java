@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class Demo {
     public static void main(String[] args) {
         int[] arr = {1,2,32,2,4,2,3,5,4,55,66,7,7,8,9,34,34,34,5,4,67,6,734,5456};
-        select(arr);
+        insertion(arr);
         System.out.println(Arrays.toString(arr));
 
     }
