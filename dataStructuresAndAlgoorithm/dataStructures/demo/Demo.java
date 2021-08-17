@@ -1,5 +1,6 @@
 package dataStructuresAndAlgoorithm.dataStructures.demo;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -9,35 +10,25 @@ import java.util.HashMap;
  */
 public class Demo {
     public static void main(String[] args) {
-        System.out.println(test1());
-
+        int[] arr = {1,2,32,2,4,2,3,5,4,55,66,7,7,8,9,34,34,34,5,4,67,6,734,5456};
+        bubble(arr);
+        System.out.println(Arrays.toString(arr));
 
     }
-    public static int test1() {
-        int a = 1;
-        try {
-            System.out.println(a / 0);
-            a = 2;
-        } catch (ArithmeticException e) {
-            a = 3;
-            return a;
-        } finally {
-            a = 4;
-        }
-        return a;
-    }
-    public static int test2() {
-        int a = 1;
-        try {
-            System.out.println(a / 0);
-            a = 2;
-        } catch (ArithmeticException e) {
-            a = 3;
-            return a;
-        } finally {
-            a = 4;
-            return a;
+
+    public static void bubble(int[] arr){
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]){
+                    arr[j] = arr[j] ^ arr[j + 1];
+                    arr[j + 1] = arr[j + 1] ^ arr[j];
+                    arr[j] = arr[j] ^ arr[j + 1];
+                }
+            }
         }
     }
+
+
+
 
 }
