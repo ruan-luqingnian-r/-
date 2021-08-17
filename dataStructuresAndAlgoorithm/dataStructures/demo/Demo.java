@@ -9,26 +9,35 @@ import java.util.HashMap;
  */
 public class Demo {
     public static void main(String[] args) {
+        System.out.println(test1());
 
-        System.out.println(2 << 3);
-        System.out.println(40 >> 3);
-        System.out.printf("i++=%d,++i=%d",test1(),test2());
+
+    }
+    public static int test1() {
+        int a = 1;
+        try {
+            System.out.println(a / 0);
+            a = 2;
+        } catch (ArithmeticException e) {
+            a = 3;
+            return a;
+        } finally {
+            a = 4;
+        }
+        return a;
+    }
+    public static int test2() {
+        int a = 1;
+        try {
+            System.out.println(a / 0);
+            a = 2;
+        } catch (ArithmeticException e) {
+            a = 3;
+            return a;
+        } finally {
+            a = 4;
+            return a;
+        }
     }
 
-    public static void swap(int a,int b){
-        System.out.printf("a=%d,b=%d",a,b);
-        a = a^b; //a = a^b
-        b = b^a; //b = b^a^b = a
-        a = a^b; //a = a^b^a = b
-        System.out.printf("\na=%d,b=%d",a,b);
-    }
-
-    public static int test1(){
-        int i = 5;
-        return i++;
-    }
-    public static int test2(){
-        int i = 5;
-        return ++i;
-    }
 }
