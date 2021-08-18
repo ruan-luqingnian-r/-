@@ -15,30 +15,13 @@ public class ShellSort {
         System.out.println(Arrays.toString(arr));
     }
 
-    //移动排序
-    public static void shellSort2(int[] arr){
-        for(int gap = arr.length/2; gap>0;gap/=2){
-            for(int i = gap;i<arr.length;i++){
-                int j = i;
-                int temp = arr[j];
-                if(arr[j]<arr[j-gap]){
-                    while(j-gap>=0 && temp<arr[j-gap]){
-                        arr[j] = arr[j-gap];
-                        j-=gap;
-                    }
-                    arr[j] = temp;
-                }
-            }
-        }
-    }
-
     public static void shellSort(int[] arr){
         for (int gap = arr.length / 2; gap > 0; gap /= 2) {
             for (int i = gap; i < arr.length;i++){
                 int j = i;//保存下标
                 int temp = arr[j];//待插入数字
                 if (arr[j] < arr[j - gap]){
-                    while (j - gap >= 0 && temp > arr[j - gap]){
+                    while (j - gap >= 0 && temp < arr[j - gap]){
                         arr[j] = arr[j - gap];
                         j -= gap;
                     }
