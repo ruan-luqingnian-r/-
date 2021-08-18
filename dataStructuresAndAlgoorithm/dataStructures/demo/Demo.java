@@ -1,8 +1,10 @@
 package dataStructuresAndAlgoorithm.dataStructures.demo;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @Author: ruan
@@ -11,30 +13,28 @@ import java.util.HashMap;
  */
 public class Demo {
     public static void main(String[] args) {
-
-        test();
-
-    }
-
-    public static void test(){
-        try(FileInputStream fis = new FileInputStream("C:/Users/阮相歌/Desktop/Data-structure-and-algorithm/dataStructuresAndAlgoorithm/dataStructures/demo/test.txt");
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            FileOutputStream fos = new FileOutputStream("C:/Users/阮相歌/Desktop/Data-structure-and-algorithm/dataStructuresAndAlgoorithm/dataStructures/demo/copy.txt");
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-            ) {
-            //读取输入流
-            int size;
-            byte[] buf = new byte[1024];
-            while ((size = bis.read(buf)) != -1){
-                bos.write(buf,0,size);
-            }
-
-        }catch (IOException e) {
-            e.printStackTrace();
+        //定义一个list用于存储目录
+        List<String> paths = new ArrayList<>();
+        getAllFilePast(new File("C:\\Users\\阮相歌\\Desktop\\Data-structure-and-algorithm\\dataStructuresAndAlgoorithm\\dataStructures"),paths);
+        for (String path : paths){
+            System.out.println(path);
         }
     }
 
-
+    private static void getAllFilePast(File file, List<String> paths) {
+        File[] files = file.listFiles();
+        if (files == null){
+            return;
+        }
+        for (File f : files){
+            if (f.isDirectory()){
+                paths.add(f.getPath());
+                getAllFilePast(f,paths);
+            }else {
+                paths.add(f.getPath());
+            }
+        }
+    }
 
 
 }
