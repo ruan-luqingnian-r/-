@@ -2,6 +2,7 @@ package dataStructuresAndAlgoorithm.dataStructures.demo;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @Author: ruan
@@ -17,6 +18,8 @@ public class Demo {
             System.out.println(path);
         }
         List<Object> objects = Collections.synchronizedList(new ArrayList<>());
+        CopyOnWriteArrayList<String> strings = new CopyOnWriteArrayList<>();
+        strings.add("");
     }
 
     private static void getAllFilePast(File file, List<String> paths) {
