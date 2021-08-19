@@ -1,10 +1,7 @@
 package dataStructuresAndAlgoorithm.dataStructures.demo;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author: ruan
@@ -19,6 +16,7 @@ public class Demo {
         for (String path : paths){
             System.out.println(path);
         }
+        List<Object> objects = Collections.synchronizedList(new ArrayList<>());
     }
 
     private static void getAllFilePast(File file, List<String> paths) {
