@@ -9,6 +9,9 @@ import java.io.Serializable;
  */
 public class MyArrayList implements Serializable {
 
+    //使用这个字段来判断当前集合类，是否被并发修改，即使用迭代器并发修改的fail-fast机制
+    private transient int modCount = 0;
+
     //第一次扩容的容量
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -38,6 +41,10 @@ public class MyArrayList implements Serializable {
 
     //添加元素
     public boolean add(Object e){
+
+        //用于并发判断
+        modCount++;
+
         //判断容量
         ensureCapacityInternal(size + 1);
         //使用下标赋值,尾部插入
@@ -128,6 +135,10 @@ public class MyArrayList implements Serializable {
      */
     public Object remove(int index){
         rangeCheck(index);
+
+        //用于并发判断
+        modCount++;
+
         Object oldValue = elementData[index];
         //计算要删除的位置后面还有几个元素
         int numMoved = size - index - 1;
