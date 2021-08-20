@@ -20,6 +20,8 @@ public class Demo {
         int[] arr = {12,31,42,3,42,123,42,324,45,25,6,325,643,4,32545,65,34,21,12,3};
         shell(arr);
         System.out.println(Arrays.toString(arr));
+        Map<Object, Object> map = Collections.synchronizedMap();
+        map.put()
     }
 
     private static void getAllFilePast(File file, List<String> paths) {
