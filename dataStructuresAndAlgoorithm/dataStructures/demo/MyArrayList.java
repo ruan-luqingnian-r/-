@@ -68,4 +68,81 @@ public class MyArrayList implements Serializable {
             elementData = objects;
         }
     }
+
+    /**
+     * 通过下标获取对象
+     */
+    public Object get(int index){
+        rangeCheck(index);
+        return elementData[index];
+    }
+
+
+    /**
+     * 检查下标索引是否越界
+     * @param index
+     */
+    private void rangeCheck(int index) {
+        if(index < 0 || index > size){
+            throw new IndexOutOfBoundsException("索引越界");
+        }
+    }
+
+    /**
+     * 判断对象所在的位置
+     */
+    public int indexOf(Object o){
+        if (o == null){
+            for (int i = 0;i < size;i++){
+                if (elementData[i] == null){
+                    return i;
+                }
+            }
+        }else {
+            for (int i = 0;i < size;i++){
+                if (elementData[i] == o){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 根据索引修改
+     * @param index
+     * @param obj
+     * @return
+     */
+    public Object set(int index,Object obj){
+        rangeCheck(index);
+        Object oldValue = elementData[index];
+        elementData[index] = obj;
+        return oldValue;
+    }
+
+    /**
+     * 根据删除索引元素
+     * @param index
+     * @return
+     */
+    public Object remove(int index){
+        rangeCheck(index);
+        Object oldValue = elementData[index];
+        //计算要删除的位置后面还有几个元素
+        int numMoved = size - index - 1;
+        if (numMoved > 0){
+            System.arraycopy(elementData,index + 1,elementData,index,numMoved);
+        }
+        elementData[--size] = null;
+        return oldValue;
+    }
+
+    /**
+     * 获取数组大小
+     * @return
+     */
+    public int size(){
+        return this.size;
+    }
 }
