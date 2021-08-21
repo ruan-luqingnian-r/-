@@ -20,6 +20,7 @@ public class Demo {
         int[] arr = {12,31,42,3,42,123,42,324,45,25,6,325,643,4,32545,65,34,21,12,3};
         quick(arr,0,arr.length - 1);
         System.out.println(Arrays.toString(arr));
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
     }
 
     private static void getAllFilePast(File file, List<String> paths) {
