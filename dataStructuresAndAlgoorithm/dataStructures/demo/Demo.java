@@ -12,9 +12,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Demo {
 
     public static void main(String[] args) {
-        Thread01 thread01 = new Thread01();
-        thread01.setName("demo01");
-        thread01.start();
+        Thread02 thread02 = new Thread02();
+        Thread thread = new Thread(thread02);
+        thread.setName("Dome2");
+        thread.start();
 
         System.out.println("主线程名称:"+Thread.currentThread().getName());
     }
