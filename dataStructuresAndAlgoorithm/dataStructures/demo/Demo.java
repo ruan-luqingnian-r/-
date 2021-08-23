@@ -12,12 +12,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Demo {
 
     public static void main(String[] args) {
-        Thread02 thread02 = new Thread02();
-        Thread thread = new Thread(thread02);
-        thread.setName("Dome2");
-        thread.start();
+        Thread thread = new Thread(()->{
+            System.out.println("使用匿名内部类实现多线程:"+Thread.currentThread().getName());
+        });
 
-        System.out.println("主线程名称:"+Thread.currentThread().getName());
+        thread.setName("Thread03");
+        thread.start();
     }
 
 }
