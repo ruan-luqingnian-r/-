@@ -3,6 +3,7 @@ package dataStructuresAndAlgoorithm.dataStructures.demo;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.FutureTask;
 
 /**
  * @Author: ruan
@@ -12,11 +13,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Demo {
 
     public static void main(String[] args) {
-        Thread thread = new Thread(()->{
-            System.out.println("使用匿名内部类实现多线程:"+Thread.currentThread().getName());
-        });
-
-        thread.setName("Thread03");
+        MyTask myTask = new MyTask();
+        FutureTask<Object> futureTask = new FutureTask<>(myTask);
+        Thread thread = new Thread(futureTask);
+        thread.setName("dome3");
         thread.start();
     }
 
