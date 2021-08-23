@@ -18,6 +18,7 @@ public class Demo {
         }
         System.out.println("主线程名称:"+Thread.currentThread().getName());
         executorService.shutdown();
+
     }
 
 }
