@@ -2,9 +2,7 @@ package dataStructuresAndAlgoorithm.dataStructures.demo;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 /**
  * @Author: ruan
@@ -14,20 +12,12 @@ import java.util.concurrent.FutureTask;
 public class Demo {
 
     public static void main(String[] args) {
-        MyTask myTask = new MyTask();
-        FutureTask<Object> futureTask = new FutureTask<>(myTask);
-        Thread thread = new Thread(futureTask);
-        thread.setName("dome3");
-        thread.start();
-        try {
-            System.out.println(futureTask.get());
-        } catch (InterruptedException e) {
-            //阻塞等待中被阻断
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            //执行过程中发送发生异常
-            e.printStackTrace();
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        for (int i = 0; i < 10; i++) {
+            executorService.execute(new Thread04());
         }
+        System.out.println("主线程名称:"+Thread.currentThread().getName());
+        executorService.shutdown();
     }
 
 }
