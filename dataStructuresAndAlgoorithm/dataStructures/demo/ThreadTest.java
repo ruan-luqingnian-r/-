@@ -25,4 +25,8 @@ public class ThreadTest {
     public synchronized void add2(){
         num++;
     }
+
+    public static void main(String[] args) {
+
+    }
 }
