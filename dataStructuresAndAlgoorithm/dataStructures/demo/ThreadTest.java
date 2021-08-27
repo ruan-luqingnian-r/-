@@ -24,7 +24,6 @@ public class ThreadTest {
     public synchronized void add2() {
         num++;
     }
-
     public static void main(String[] args) {
         for (int i = 0; i < 10; i++) {
             Thread thread = new Thread(() -> {
