@@ -35,5 +35,4 @@ public class ThreadTest {
         }
         System.out.println(num);
     }
-
 }
