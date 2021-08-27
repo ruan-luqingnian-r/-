@@ -9,7 +9,6 @@ import java.util.concurrent.locks.ReentrantLock;
  * @Description:
  */
 public class ThreadTest {
-
     private static volatile int num = 0;
     //使用lock，每个对象都是有锁的，只有获得这个锁才可以进行对应从操作
     static Lock lock = new ReentrantLock();
