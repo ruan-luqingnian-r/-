@@ -12,6 +12,7 @@ public class SelectSort {
     public static void main(String[] args) {
         int[] arr = {12,31,42,3,42,123,42,324,45,25,6,325,643,4,32545,65,34,21,12,3};
         int[] sort = sort(arr);
+
         System.out.println(Arrays.toString(sort));
     }
 
