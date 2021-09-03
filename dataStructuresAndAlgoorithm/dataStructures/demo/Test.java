@@ -7,13 +7,15 @@ package dataStructuresAndAlgoorithm.dataStructures.demo;
  */
 public class Test {
     public static void main(String[] args) {
-        MyArrayList list = new MyArrayList();
-        for (int i = 0;i < 12;i++){
-            list.add("" + i);
-        }
+    }
 
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
+    private void metheA(){
+        //获取锁 TODO
+        metheB();
+    }
+
+    private void metheB() {
+        //获取锁 TODO
+        //
     }
 }
