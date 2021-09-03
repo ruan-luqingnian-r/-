@@ -3,7 +3,7 @@ package dataStructuresAndAlgoorithm.dataStructures.demo;
 /**
  * @Author: ruan
  * Date: 2021/9/3 16:02
- * @Description: 死锁
+ * @Description: 解决死锁-调整锁的范围
  *
  */
 public class LockDome {
@@ -19,9 +19,10 @@ public class LockDome {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            synchronized (lockB){
-                System.out.println("我是A方法，获得锁B" + Thread.currentThread().getName());
-            }
+
+        }
+        synchronized (lockB){
+            System.out.println("我是A方法，获得锁B" + Thread.currentThread().getName());
         }
     }
 
@@ -34,10 +35,9 @@ public class LockDome {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            synchronized (lockA){
-                System.out.println("我是B方法，获得锁A" + Thread.currentThread().getName());
-            }
+        }
+        synchronized (lockA){
+            System.out.println("我是B方法，获得锁A" + Thread.currentThread().getName());
         }
     }
 
