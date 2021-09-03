@@ -46,13 +46,15 @@ public class LockDome {
         System.out.println("主线程运行开始" + Thread.currentThread().getName());
         LockDome lockDome = new LockDome();
 
-        new Thread(()->{
-            lockDome.methodA();
-        }).start();
+        for (int i = 0; i < 10; i++) {
+            new Thread(()->{
+                lockDome.methodA();
+            }).start();
 
-        new Thread(()->{
-            lockDome.methodB();
-        }).start();
+            new Thread(()->{
+                lockDome.methodB();
+            }).start();
+        }
 
         System.out.println("主线程运行结束" + Thread.currentThread().getName());
     }
