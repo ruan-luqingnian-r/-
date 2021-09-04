@@ -34,4 +34,8 @@ public class Main {
             unReentrantLock.unlock();
         }
     }
+
+    public static void main(String[] args) {
+        new Main().methodA();
+    }
 }
