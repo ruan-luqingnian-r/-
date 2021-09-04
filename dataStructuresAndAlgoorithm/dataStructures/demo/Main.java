@@ -7,7 +7,9 @@ package dataStructuresAndAlgoorithm.dataStructures.demo;
  */
 public class Main {
 
-    private UnReentrantLock unReentrantLock = new UnReentrantLock();
+    //private UnReentrantLock unReentrantLock = new UnReentrantLock();
+
+    private MyReentrantLock unReentrantLock = new MyReentrantLock();
 
     public void methodA(){
 
