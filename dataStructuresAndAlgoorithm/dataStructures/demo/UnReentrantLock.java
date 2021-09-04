@@ -9,11 +9,20 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class UnReentrantLock {
 
-    public void lock(){
+    private boolean isLock = false;
+
+    public synchronized void lock(){
+        System.out.println("进入加锁");
         //判断是否已经被锁，如果被锁进入等待如果没有进行加锁
+        while (isLock){
+            System.out.println("已经被锁进入等待");
+        }
+        isLock = true;
     }
 
-    public void unlock(){
-
+    public synchronized void unlock(){
+        System.out.println("解锁");
+        isLock = false;
+        notify();
     }
 }
