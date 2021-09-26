@@ -34,5 +34,31 @@ public class StringDome {
 
         double d=Double.parseDouble("1.52123");//字符串类型转换为双精度浮点型
 
+        /**
+         * Math类
+         */
+
+        //计算平方根
+        System.out.println(Math.sqrt(16));
+
+        //计算立方根
+        System.out.println(Math.cbrt(8));
+    
+        //两个数的最大，支持int，1ong，float，double 
+        System.out.println(Math.max(2.9,4.5));
+        System.out.println(Math.min(2.9,4.5));
+
+        //cei1向上取整，更大的值方向靠拢，中文是天花板
+        System.out.println(Math.ceil(19.7));System.out.println(Math.ceil(-20.1));
+
+        //f1oor向下取整，更小的值方向靠拢
+        System.out.println(Math.floor(19.7));System.out.println(Math.floor(-20.1));
+
+        //随机数
+        System.out.println(Math.random());//小于1大于0的double类型的数
+
+        //产生1到10的随机数，int方法进行转换它会去掉小数掉后面的数字即只获取整数部分，不是四舍五入
+        int random=(int)(Math.random()*10+1);
+
     }
 }
