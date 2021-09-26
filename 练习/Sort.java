@@ -2,7 +2,9 @@ package 练习;
 
 import sun.plugin.javascript.navig.Array;
 
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @Author: ruan
@@ -11,13 +13,20 @@ import java.util.Arrays;
  */
 public class Sort {
     public static void main(String[] args) {
-        int[] arr = new int[20];
+        int[] arr = new int[80000000];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int)(Math.random() * 100 + 1);
         }
-        System.out.println("排序前:" + Arrays.toString(arr));
-        shellSort(arr);
-        System.out.println("排序后:" + Arrays.toString(arr));
+        //System.out.println("排序前:" + Arrays.toString(arr));
+        //shellSort(arr);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println("开始排序:"+simpleDateFormat.format(new Date()));
+        quickSort(arr,0, arr.length - 1);
+        //shellSort(arr);
+        System.out.println("开始完成:"+simpleDateFormat.format(new Date()));
+        //System.out.println("排序后:" + Arrays.toString(arr));
+        ArrayList<Integer> list = binarySearch(arr, 66, 0, arr.length);
+        System.out.println(list.size());
     }
 
     /**
@@ -96,6 +105,84 @@ public class Sort {
                     arr[j] = value;
                 }
             }
+        }
+    }
+
+    /**
+     * 快速排序
+     * @param arr
+     * @param left
+     * @param right
+     */
+    public static void quickSort(int[] arr,int left,int right){
+        //保存相关遍历
+        int l = left;
+        int r = right;
+        int middle = arr[(left + right) / 2];
+        while (l < r){
+            while (arr[l] < middle){
+                l++;
+            }
+            while (arr[r] > middle){
+                r--;
+            }
+            if (l >= r){
+                break;
+            }
+            //开始交换
+            arr[l] = arr[l] ^ arr[r];
+            arr[r] = arr[r] ^ arr[l];
+            arr[l] = arr[l] ^ arr[r];
+            if (arr[l] == middle){
+                r--;
+            }
+            if (arr[r] == middle){
+                l++;
+            }
+        }
+        if (l == r){
+            l++;
+            r--;
+        }
+        if (l < right){
+            quickSort(arr, l, right);
+        }
+        if (left < r){
+            quickSort(arr, left, r);
+        }
+    }
+
+    public static ArrayList<Integer> binarySearch(int[] arr,int target,int left,int right){
+        int mid = (left + right) / 2;
+        int value = arr[mid];
+        if (left > right){
+            return new ArrayList<>();
+        }
+        if (value > target){
+            return binarySearch(arr, target, left, mid - 1);
+        }else if (value < target){
+            return binarySearch(arr, target, mid + 1, right);
+        }else {
+            ArrayList<Integer> list = new ArrayList<>();
+            list.add(mid);
+            //扫描相同值
+            int temp1 = mid + 1;
+            while (true){
+                if (temp1 > arr.length || arr[temp1] != target){
+                    break;
+                }
+                list.add(temp1);
+                temp1++;
+            }
+            int temp2 = mid - 1;
+            while (true){
+                if (temp2 < 0 || arr[temp2] != target){
+                    break;
+                }
+                list.add(temp2);
+                temp2--;
+            }
+            return list;
         }
     }
 }
