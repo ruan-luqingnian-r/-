@@ -1,6 +1,7 @@
 package 练习.java927;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * @Author: ruan
@@ -168,6 +169,13 @@ public class MyArrayList implements Serializable {
         //末尾置空
         elementData[--size] = null;
         return index;
+    }
+
+    /**
+     * 打印内容
+     */
+    public void list(){
+        System.out.println(Arrays.toString(elementData));
     }
 
 }

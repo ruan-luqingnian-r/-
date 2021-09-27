@@ -1,5 +1,7 @@
 package 练习.java927;
 
+import java.util.Arrays;
+
 /**
  * @Author: ruan
  * Date: 2021/9/27 15:14
@@ -8,13 +10,16 @@ package 练习.java927;
 public class Test {
     MyReentryLock myReentryLock = new MyReentryLock();
     public static void main(String[] args) {
-        Test test = new Test();
-        test.methodA();
-
+        /*Test test = new Test();
+        test.methodA();*/
+        MyArrayList myArrayList = new MyArrayList(5);
+        for (int i = 0; i < 15; i++) {
+            myArrayList.add(i);
+        }
+        myArrayList.list();
     }
 
     public void methodA(){
-
         try {
             myReentryLock.lock();
             System.out.println("methodA被调用");
