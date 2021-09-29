@@ -1,7 +1,9 @@
 package 练习.java927;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * @Author: ruan
@@ -10,13 +12,20 @@ import java.util.Arrays;
  */
 public class Sort {
     public static void main(String[] args) {
-        int[] arr = new int[80000];
+        int[] arr = new int[20];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 1000 + 1);
         }
         System.out.println("排序前:" + Arrays.toString(arr));
-        insertionSort(arr);
+        quickSort(arr,0,arr.length - 1);
         System.out.println("排序后:" + Arrays.toString(arr));
+
+        /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
+        Date date1 = new Date();
+        System.out.println("排序开始:" + simpleDateFormat.format(date1));
+        insertionSort(arr);
+        Date date2 = new Date();
+        System.out.println("排序结束:" + simpleDateFormat.format(date2));*/
     }
 
     /**
@@ -101,6 +110,43 @@ public class Sort {
         }
     }
 
+    public static void quickSort(int[] arr,int left,int right){
+        int l = left;
+        int r = right;
+        int value = arr[(left + right) / 2];
+        while (l < r){
+            while (arr[l] < value){
+                l++;
+            }
+            while (arr[r] > value){
+                r--;
+            }
+            if (l >= r){
+                break;
+            }
+            //开始交换
+            arr[l] = arr[l] ^ arr[r];
+            arr[r] = arr[r] ^ arr[l];
+            arr[l] = arr[l] ^ arr[r];
+            if (arr[l] == value){
+                r--;
+            }
+            if (arr[r] == value){
+                l++;
+            }
+        }
+        if (l == r){
+            l++;
+            r--;
+        }
+        if (l < right){
+            quickSort(arr, l, right);
+        }
+        if (left < r){
+            quickSort(arr, left, r);
+        }
+
+    }
 
 
 }
