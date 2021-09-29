@@ -18,6 +18,10 @@ public class Sort {
         System.out.println("排序后:" + Arrays.toString(arr));
     }
 
+    public static void bubbleSort(int[] arr){
+
+    }
+
 
 
 }
