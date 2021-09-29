@@ -15,7 +15,7 @@ public class Sort {
             arr[i] = (int) (Math.random() * 1000 + 1);
         }
         System.out.println("排序前:" + Arrays.toString(arr));
-        selectSort(arr);
+        insertionSort(arr);
         System.out.println("排序后:" + Arrays.toString(arr));
     }
 
@@ -41,7 +41,7 @@ public class Sort {
      */
     public static void selectSort(int[] arr){
         for (int i = 0; i < arr.length; i++) {
-            //保存下标
+            //保存下标和数值
             int minIndex = i;
             int minValue = arr[minIndex];
             //遍历数组找到真正的最小值
@@ -63,6 +63,18 @@ public class Sort {
      * @param arr
      */
     public static void insertionSort(int[] arr){
+        for (int i = 1; i < arr.length; i++) {
+            //保存下标和前一个数组值
+            int value = arr[i];
+            int index = i - 1;
+            //遍历数组找到数据位置
+            while (index >= 0 && arr[index] > value){
+                arr[index + 1] = arr[index];
+                index--;
+            }
+            //找到待插入位置
+            arr[index + 1] = value;
+        }
 
     }
 
