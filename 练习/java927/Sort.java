@@ -2,6 +2,7 @@ package 练习.java927;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -12,13 +13,13 @@ import java.util.Date;
  */
 public class Sort {
     public static void main(String[] args) {
-        int[] arr = new int[20];
+        int[] arr = new int[8000000];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 1000 + 1);
         }
-        System.out.println("排序前:" + Arrays.toString(arr));
+        /*System.out.println("排序前:" + Arrays.toString(arr));
         quickSort(arr,0,arr.length - 1);
-        System.out.println("排序后:" + Arrays.toString(arr));
+        System.out.println("排序后:" + Arrays.toString(arr));*/
 
         /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
         Date date1 = new Date();
@@ -26,6 +27,9 @@ public class Sort {
         insertionSort(arr);
         Date date2 = new Date();
         System.out.println("排序结束:" + simpleDateFormat.format(date2));*/
+        quickSort(arr,0,arr.length - 1);
+        ArrayList<Integer> list = binarySearch(arr, 666, 0, arr.length - 1);
+        System.out.println(list.size());
     }
 
     /**
@@ -146,6 +150,39 @@ public class Sort {
             quickSort(arr, left, r);
         }
 
+    }
+
+    public static ArrayList<Integer> binarySearch(int[] arr,int target,int left,int right){
+        int mod = (left + right) / 2;
+        int value = arr[mod];
+        if (left > right){
+            return new ArrayList<>();
+        }
+        if (value > target){
+            return binarySearch(arr, target, left, mod - 1);
+        }else if (value < target){
+            return binarySearch(arr, target, mod + 1, right);
+        }else {
+            ArrayList<Integer> list = new ArrayList<>();
+            list.add(mod);
+            int temp1 = mod + 1;
+            while (true){
+                if (temp1 > arr.length || arr[temp1] != target){
+                    break;
+                }
+                list.add(temp1);
+                temp1++;
+            }
+            int temp2 = mod - 1;
+            while (true){
+                if (temp1 < 0 || arr[temp1] != target){
+                    break;
+                }
+                list.add(temp1);
+                temp1--;
+            }
+            return list;
+        }
     }
 
 
