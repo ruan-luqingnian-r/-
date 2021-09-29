@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Sort {
     public static void main(String[] args) {
-        int[] arr = new int[8000000];
+        int[] arr = new int[80000000];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 1000 + 1);
         }
@@ -21,15 +21,16 @@ public class Sort {
         quickSort(arr,0,arr.length - 1);
         System.out.println("排序后:" + Arrays.toString(arr));*/
 
-        /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
         Date date1 = new Date();
-        System.out.println("排序开始:" + simpleDateFormat.format(date1));
-        insertionSort(arr);
+        System.out.println("排序开始:" + simpleDateFormat1.format(date1));
+        quickSort(arr,0, arr.length - 1);
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
         Date date2 = new Date();
-        System.out.println("排序结束:" + simpleDateFormat.format(date2));*/
-        quickSort(arr,0,arr.length - 1);
+        System.out.println("排序结束:" + simpleDateFormat2.format(date2));
+        /*quickSort(arr,0,arr.length - 1);
         ArrayList<Integer> list = binarySearch(arr, 666, 0, arr.length - 1);
-        System.out.println(list.size());
+        System.out.println(list.size());*/
     }
 
     /**
@@ -184,6 +185,7 @@ public class Sort {
             return list;
         }
     }
+
 
 
 }
