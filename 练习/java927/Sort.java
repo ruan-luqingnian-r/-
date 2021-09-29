@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class Sort {
     public static void main(String[] args) {
-        int[] arr = new int[20];
+        int[] arr = new int[80000];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 1000 + 1);
         }
@@ -76,6 +76,29 @@ public class Sort {
             arr[index + 1] = value;
         }
 
+    }
+
+    /**
+     * 希尔排序
+     * @param arr
+     */
+    public static void shellSort(int[] arr){
+        //分组
+        for (int gap = (arr.length / 2); gap > 0; gap /= 2) {
+            for (int i = gap; i < arr.length; i++) {
+                //保存下标和数组
+                int j = gap;
+                int value = arr[j];
+                if (arr[gap - j] > arr[j]){
+                    while ((gap - j) >= 0 && arr[gap - j] > arr[j]){
+                        arr[j] = arr[gap - j];
+                        gap = gap - j;
+                    }
+                    arr[j] = value;
+                }
+
+            }
+        }
     }
 
 
