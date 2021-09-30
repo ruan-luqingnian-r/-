@@ -19,14 +19,16 @@ public class Sort {
         }
         //System.out.println("排序前:" + Arrays.toString(arr));
         //shellSort(arr);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        System.out.println("开始排序:"+simpleDateFormat.format(new Date()));
-        quickSort(arr,0, arr.length - 1);
-        //shellSort(arr);
-        System.out.println("开始完成:"+simpleDateFormat.format(new Date()));
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
+        Date date1 = new Date();
+        System.out.println("排序开始:" + simpleDateFormat1.format(date1));
+        radixSort1(arr);
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
+        Date date2 = new Date();
+        System.out.println("排序结束:" + simpleDateFormat2.format(date2));
         //System.out.println("排序后:" + Arrays.toString(arr));
-        ArrayList<Integer> list = binarySearch(arr, 66, 0, arr.length);
-        System.out.println(list.size());
+        /*ArrayList<Integer> list = binarySearch(arr, 66, 0, arr.length);
+        System.out.println(list.size());*/
     }
 
     /**
@@ -183,6 +185,97 @@ public class Sort {
                 temp2--;
             }
             return list;
+        }
+    }
+
+    /**
+     * 基数排序
+     * @param arr
+     */
+    public static void radixSort(int[] arr){
+        //定义一个二位数组用来表示10个桶,每个桶表示一个数组
+        int[][] bucket = new int[10][arr.length];
+        //为了定义记录桶中的数量，定义一个一维数组记录每个bucket中的数据数量
+        int[] bucketElementCounts = new int[10];
+        //首先找到数组中的最大值
+        int max = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max){
+                max = arr[i];
+            }
+        }
+        //判断最大数的位数
+        int maxLength = (max + "").length();
+
+        for (int i = 0,n = 1; i < maxLength; i++,n *= 10) {
+            //第一轮根据个位进行处理
+            for (int j = 0; j < arr.length; j++) {
+                int digitofElement  = arr[j] / n % 10;
+                //放入对应的桶中
+                bucket[digitofElement][bucketElementCounts[digitofElement]] = arr[j];
+                bucketElementCounts[digitofElement]++;
+            }
+            //按照桶的顺序（一维数组的下标依次取出数据，放入原来的数组中）
+            int index = 0;
+            //遍历桶中的每一个元素放入原数组中
+            for (int k = 0; k < bucketElementCounts.length; k++) {
+                //如果桶中有数据才放入
+                if (bucketElementCounts[k] != 0){
+                    //循环该桶及第k个一维数组，放入
+                    for (int l = 0; l < bucketElementCounts[k]; l++) {
+                        //取出元素
+                        arr[index] = bucket[k][l];
+                        index++;
+                    }
+                }
+                //第一轮处理后bucketElementCounts[k] = 0;!!!!
+                bucketElementCounts[k] = 0;
+            }
+        }
+    }
+
+    public static void radixSort1(int[] arr) {
+
+        //定义一个二维数组，表示10个桶，每个桶就是一个一维数组
+        int[][] bucket = new int[10][arr.length];
+        //为了记录没个桶中，实际存放了多少数据，我们定义一个一维数组记录每个桶放入的数据个数
+        int[] bucketElementCounts = new int[10];
+
+        //得到数组中最大的位数
+        int max = arr[0];//假设第一个是最大的
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        //得到最大的位数
+        int maxLength = (max + "").length();
+
+        for (int i = 0, n = 1; i < maxLength; i++, n *= 10) {
+            //第一轮（针对元素的个位进行处理）
+            for (int j = 0; j < arr.length; j++) {
+                //取出元素的个位
+                int digitofElement = arr[j] / n % 10;
+                //放入到对应的桶
+                bucket[digitofElement][bucketElementCounts[digitofElement]] = arr[j];
+                bucketElementCounts[digitofElement]++;
+            }
+            //按照桶的顺序（一维数组的下标依次取出数据，放入原来的数组中）
+            int index = 0;
+            //遍历每一个桶讲桶中的元素放入原数组
+            for (int k = 0; k < bucketElementCounts.length; k++) {
+                //如果桶中有数据才放入
+                if (bucketElementCounts[k] != 0) {
+                    //循环该桶及第k个一维数组，放入
+                    for (int l = 0; l < bucketElementCounts[k]; l++) {
+                        //取出元素放入arr
+                        arr[index] = bucket[k][l];
+                        index++;
+                    }
+                }
+                //第一轮处理后bucketElementCounts[k] = 0;!!!!
+                bucketElementCounts[k] = 0;
+            }
         }
     }
 }

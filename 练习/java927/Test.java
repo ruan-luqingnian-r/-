@@ -12,11 +12,7 @@ public class Test {
     public static void main(String[] args) {
         /*Test test = new Test();
         test.methodA();*/
-        MyArrayList myArrayList = new MyArrayList(5);
-        for (int i = 0; i < 15; i++) {
-            myArrayList.add(i);
-        }
-        myArrayList.list();
+        System.out.println(1%2 == 1);
     }
 
     public void methodA(){
