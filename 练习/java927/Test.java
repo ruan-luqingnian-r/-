@@ -10,8 +10,8 @@ import java.util.Arrays;
 public class Test {
     MyReentryLock myReentryLock = new MyReentryLock();
     public static void main(String[] args) {
-        /*Test test = new Test();
-        test.methodA();*/
+        Test test = new Test();
+        test.methodA();
         System.out.println(1%2 == 1);
     }
 
