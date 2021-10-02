@@ -12,7 +12,7 @@ public class Test {
     public static void main(String[] args) {
         Test test = new Test();
         test.methodA();
-        System.out.println(1%2 == 1);
+        //System.out.println(1%2 == 1);
     }
 
     public void methodA(){
