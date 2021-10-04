@@ -43,6 +43,24 @@ public class MyReentryLock {
         System.out.println("加锁成功");
     }
 
+    /**
+     * 解锁方法
+     */
+    public synchronized void unlock(){
+        System.out.println("开始解锁...");
+        //获取当前线程
+        Thread thread = Thread.currentThread();
+        if (lockOrder == thread){
+            modCount--;
+            if (modCount == 0){
+                isLock = false;
+                lockOrder = null;
+                notify();
+                System.out.println("解锁成功");
+            }
+        }
+    }
+
 
 
 }
