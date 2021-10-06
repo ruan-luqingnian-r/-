@@ -10,9 +10,15 @@ import java.util.Arrays;
  */
 public class MyArrayList implements Serializable {
     /**
-     * 并发修改标记
+     * 标记位-是否被并发修改
      */
-    private transient int modCount = 0;
+    private transient int modCount;
+
+    /**
+     * 默认扩容大小
+     */
+    private static final int DEFAULT_CAPACITY = 10;
+
 
 
 
