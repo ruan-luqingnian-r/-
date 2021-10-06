@@ -97,7 +97,97 @@ public class MyArrayList implements Serializable {
      * @return 插入成功
      */
     public boolean add(Object o){
+        //记录并发
+        modCount++;
+        //确保容量满足
+        ensureCapacityInternal(size + 1);
+        //插入数据
+        elementData[size++] = o;
+        return true;
+    }
 
+    /**
+     * 根据下标获取数据
+     * @param index 下标
+     * @return 对应数据
+     */
+    public Object get(int index){
+        //下标检查
+        rangIndex(index);
+        return elementData[index];
+    }
+
+    /**
+     * 根据数据获取对应下标
+     * @param o 数据
+     * @return 对应下标
+     */
+    public int indexOf(Object o){
+        if (o == null){
+            for (int i = 0; i < size; i++) {
+                if (elementData[i] == null){
+                    return i;
+                }
+            }
+        }else {
+            for (int i = 0; i < size; i++) {
+                if (elementData[i] == o){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 根据下标修改数据
+     * @param index 要修改的下标
+     * @param o 待修改数据
+     * @return 被修改的旧数据
+     */
+    public Object set(int index ,Object o){
+        //并发记录
+        modCount++;
+        rangIndex(index);
+        Object oldValue = elementData[index];
+        elementData[index] = o;
+        return oldValue;
+    }
+
+    /**
+     * 根据下标删除数据
+     * @param index 要删除数据的下标
+     * @return 被删除的数据
+     */
+    public Object remove(int index){
+        //并发记录
+        modCount++;
+        rangIndex(index);
+        Object oldValue = elementData[index];
+        //计算从删除位置之后还有多少数据
+        int numMove = size - index - 1;
+        if (numMove > 0){
+            //移动数据
+            System.arraycopy(elementData,index + 1,elementData,index,numMove);
+        }
+        //数组尾部置空
+        elementData[--size] = null;
+        return oldValue;
+    }
+
+    /**
+     * 打印数据
+     */
+    public void list(){
+        System.out.println(Arrays.toString(elementData));
+    }
+
+    /**
+     * 获取数组长度
+     * @return 数组长度
+     */
+    public int size(){
+        return this.size;
     }
 
 
