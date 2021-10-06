@@ -86,6 +86,17 @@ public class MyArrayList implements Serializable {
      * @param index 数组下标
      */
     private void rangIndex(int index){
+        if (index < 0 || index > size){
+            throw new IndexOutOfBoundsException("数组越界");
+        }
+    }
+
+    /**
+     * 插入数据
+     * @param o 待插入数据
+     * @return 插入成功
+     */
+    public boolean add(Object o){
 
     }
 
