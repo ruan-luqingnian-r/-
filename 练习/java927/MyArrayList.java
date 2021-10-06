@@ -19,6 +19,39 @@ public class MyArrayList implements Serializable {
      */
     private static final int DEFAULT_CAPACITY = 10;
 
+    /**
+     * 默认初始数组
+     */
+    private static final Object[] EMPTY_ELEMENT_DATA = {};
+
+    /**
+     * 实际存储数据的数值
+     */
+    transient Object[] elementData;
+
+    /**
+     * 数组的大小
+     */
+    private int size;
+
+    /**
+     * 空参构造
+     */
+    public MyArrayList(){
+        this.elementData = EMPTY_ELEMENT_DATA;
+    }
+    /**
+     * 实参构造
+     */
+    public MyArrayList(int initialCapacity){
+        if (initialCapacity == 0){
+            this.elementData = EMPTY_ELEMENT_DATA;
+        }else if (initialCapacity > 0){
+            this.elementData = new Object[initialCapacity];
+        }else {
+            throw new IllegalArgumentException("参数错误");
+        }
+    }
 
 
 
