@@ -53,6 +53,37 @@ public class MyArrayList implements Serializable {
         }
     }
 
+    /**
+     * 扩容机制--保证最小容量
+     * @param minCapacity 最小容量
+     */
+    private  void ensureCapacityInternal(int minCapacity){
+        //判断是否是第一次进行扩容
+        if (elementData == EMPTY_ELEMENT_DATA){
+            //是第一次扩容,直接使用默认值或者最小值
+            minCapacity = Math.max(minCapacity,DEFAULT_CAPACITY);
+        }
+        //如果不是第一次扩容并判断是否需要扩容
+        if (elementData.length - minCapacity < 0){
+            //数组长度不足需要扩容
+            int oldCapacity = elementData.length;
+            int newCapacity = oldCapacity + (oldCapacity >> 1);
+            //比较新的容量和最小容量的大小
+            if (newCapacity - minCapacity < 0){
+                newCapacity = minCapacity;
+            }
+            //创建数组
+            Object[] objects = new Object[newCapacity];
+            //拷贝数据
+            System.arraycopy(elementData,0,objects,0,elementData.length);
+            //修改引用
+            elementData = objects;
+        }
+
+
+
+    }
+
 
 
 }
