@@ -57,7 +57,7 @@ public class MyArrayList implements Serializable {
      * 扩容机制--保证最小容量
      * @param minCapacity 最小容量
      */
-    private  void ensureCapacityInternal(int minCapacity){
+    private void ensureCapacityInternal(int minCapacity){
         //判断是否是第一次进行扩容
         if (elementData == EMPTY_ELEMENT_DATA){
             //是第一次扩容,直接使用默认值或者最小值
@@ -79,8 +79,13 @@ public class MyArrayList implements Serializable {
             //修改引用
             elementData = objects;
         }
+    }
 
-
+    /**
+     * 下标检查
+     * @param index 数组下标
+     */
+    private void rangIndex(int index){
 
     }
 
