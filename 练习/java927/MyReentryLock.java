@@ -6,9 +6,8 @@ package 练习.java927;
  * @Description:
  */
 public class MyReentryLock {
-
     /**
-     * 标记位-上锁状态
+     * 标记位-锁状态
      */
     private boolean isLock = false;
 
@@ -20,47 +19,40 @@ public class MyReentryLock {
     /**
      * 加锁次数
      */
-    private int modCount = 0;
+    private int codCount = 0;
 
-    /**
-     * 加锁方法
-     */
     public synchronized void lock(){
-        System.out.println("开始加锁...");
-        //获取当前线程
+        System.out.println("开始加锁..");
+        //获取持锁线程
         Thread thread = Thread.currentThread();
+        //判断是否是同一线程
         while (isLock && lockOrder != thread){
-            System.out.println("进入等待");
+            System.out.println("进入等待..");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //加锁
         isLock = true;
         lockOrder = thread;
-        modCount++;
-        System.out.println("加锁成功");
+        codCount++;
+        System.out.println("加锁完成");
     }
 
-    /**
-     * 解锁方法
-     */
     public synchronized void unlock(){
-        System.out.println("开始解锁...");
+        System.out.println("开始解锁..");
         //获取当前线程
         Thread thread = Thread.currentThread();
         if (lockOrder == thread){
-            modCount--;
-            if (modCount == 0){
+            codCount--;
+            if (codCount == 0){
                 isLock = false;
                 lockOrder = null;
                 notify();
-                System.out.println("解锁成功");
+                System.out.println("解锁完成");
             }
         }
     }
-
-
-
 }
