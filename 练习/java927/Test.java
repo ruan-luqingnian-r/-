@@ -1,6 +1,8 @@
 package 练习.java927;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * @Author: ruan
@@ -8,7 +10,7 @@ import java.util.Arrays;
  * @Description:
  */
 public class Test {
-    MyReentryLock myReentryLock = new MyReentryLock();
+    /*MyReentryLock myReentryLock = new MyReentryLock();
     public static void main(String[] args) {
         Test test = new Test();
         test.methodA();
@@ -38,6 +40,15 @@ public class Test {
         }finally {
             myReentryLock.unlock();
         }
+    }*/
+    public static void main(String[] args) {
+        HashMap<Integer, String> hashMap = new HashMap<>();
+        TreeMap<Integer, String> treeMap = new TreeMap<>();
+        treeMap.put(2, "测试2");
+        treeMap.put(1, "测试1");
+        treeMap.put(4, "测试4");
+        treeMap.put(3, "测试3");
+        System.out.println(treeMap);
     }
 
 
