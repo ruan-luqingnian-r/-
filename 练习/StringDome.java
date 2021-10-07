@@ -48,7 +48,7 @@ public class StringDome {
         System.out.println(Math.max(2.9,4.5));
         System.out.println(Math.min(2.9,4.5));
 
-        //cei1向上取整，更大的值方向靠拢，中文是天花板
+        //cei1向上取整
         System.out.println(Math.ceil(19.7));System.out.println(Math.ceil(-20.1));
 
         //f1oor向下取整，更小的值方向靠拢

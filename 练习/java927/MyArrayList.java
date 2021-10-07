@@ -10,38 +10,34 @@ import java.util.Arrays;
  */
 public class MyArrayList implements Serializable {
     /**
-     * 标记位-是否被并发修改
+     * 是否被并发修改
      */
-    private transient int modCount;
-
+    private transient int modCount = 0;
     /**
-     * 默认扩容大小
+     * 初次默认扩容大小
      */
     private static final int DEFAULT_CAPACITY = 10;
-
     /**
-     * 默认初始数组
+     * 初始换空数组
      */
     private static final Object[] EMPTY_ELEMENT_DATA = {};
-
     /**
-     * 实际存储数据的数值
+     * 实际存储数据的数组
      */
     transient Object[] elementData;
-
     /**
-     * 数组的大小
+     * 数组实际大小
      */
     private int size;
 
     /**
-     * 空参构造
+     * 无参构造方法
      */
     public MyArrayList(){
         this.elementData = EMPTY_ELEMENT_DATA;
     }
     /**
-     * 实参构造
+     * 实参构造方法
      */
     public MyArrayList(int initialCapacity){
         if (initialCapacity == 0){
@@ -49,30 +45,29 @@ public class MyArrayList implements Serializable {
         }else if (initialCapacity > 0){
             this.elementData = new Object[initialCapacity];
         }else {
-            throw new IllegalArgumentException("参数错误");
+            throw new IllegalArgumentException("参数异常");
         }
     }
-
     /**
-     * 扩容机制--保证最小容量
+     * 容量保证
      * @param minCapacity 最小容量
      */
     private void ensureCapacityInternal(int minCapacity){
-        //判断是否是第一次进行扩容
+        //首先判断是否是初次扩容
         if (elementData == EMPTY_ELEMENT_DATA){
-            //是第一次扩容,直接使用默认值或者最小值
+            //是初次扩容
             minCapacity = Math.max(minCapacity,DEFAULT_CAPACITY);
         }
-        //如果不是第一次扩容并判断是否需要扩容
+        //如果不是初次扩容，判断是否需要进行扩容
         if (elementData.length - minCapacity < 0){
-            //数组长度不足需要扩容
+            //数组长度小于需要的最小值，需要进行扩容
             int oldCapacity = elementData.length;
             int newCapacity = oldCapacity + (oldCapacity >> 1);
-            //比较新的容量和最小容量的大小
+            //判断扩容后的值是否满座最小值
             if (newCapacity - minCapacity < 0){
                 newCapacity = minCapacity;
             }
-            //创建数组
+            //创建新数组
             Object[] objects = new Object[newCapacity];
             //拷贝数据
             System.arraycopy(elementData,0,objects,0,elementData.length);
@@ -80,47 +75,59 @@ public class MyArrayList implements Serializable {
             elementData = objects;
         }
     }
-
     /**
-     * 下标检查
-     * @param index 数组下标
+     * 下标校验
+     * @param index 待检测下标
      */
-    private void rangIndex(int index){
+    private void rangeCheck(int index){
         if (index < 0 || index > size){
             throw new IndexOutOfBoundsException("数组越界");
         }
     }
-
     /**
      * 插入数据
      * @param o 待插入数据
-     * @return 插入成功
      */
     public boolean add(Object o){
-        //记录并发
+        //并发标记
         modCount++;
-        //确保容量满足
+        //容量判断
         ensureCapacityInternal(size + 1);
         //插入数据
-        elementData[size++] = o;
+        elementData[++size] = o;
         return true;
     }
 
     /**
      * 根据下标获取数据
-     * @param index 下标
-     * @return 对应数据
+     * @param index 数据下标
+     * @return 下标对应的数据
      */
     public Object get(int index){
-        //下标检查
-        rangIndex(index);
+        //下标判断
+        rangeCheck(index);
         return elementData[index];
+    }
+    /**
+     * 更新数据
+     * @param index 要更新数据的下标
+     * @param o 新数据
+     * @return 旧数据
+     */
+    public Object set(int index,Object o){
+        //并发标记
+        modCount++;
+        //下标检查
+        rangeCheck(index);
+        Object elementDatum = elementData[index];
+        elementData[index] = o;
+        return elementDatum;
     }
 
     /**
-     * 根据数据获取对应下标
+     * 获取对应数据的下标
      * @param o 数据
-     * @return 对应下标
+     * @return 对应的下标
      */
     public int indexOf(Object o){
         if (o == null){
@@ -140,39 +147,19 @@ public class MyArrayList implements Serializable {
     }
 
     /**
-     * 根据下标修改数据
-     * @param index 要修改的下标
-     * @param o 待修改数据
-     * @return 被修改的旧数据
-     */
-    public Object set(int index ,Object o){
-        //并发记录
-        modCount++;
-        rangIndex(index);
-        Object oldValue = elementData[index];
-        elementData[index] = o;
-        return oldValue;
-    }
-
-    /**
-     * 根据下标删除数据
-     * @param index 要删除数据的下标
+     * 删除数据
+     * @param index 待删除数据
      * @return 被删除的数据
      */
     public Object remove(int index){
-        //并发记录
         modCount++;
-        rangIndex(index);
-        Object oldValue = elementData[index];
-        //计算从删除位置之后还有多少数据
+        rangeCheck(index);
+        Object elementDatum = elementData[index];
+        //待删除的数据后还有多少数据
         int numMove = size - index - 1;
-        if (numMove > 0){
-            //移动数据
-            System.arraycopy(elementData,index + 1,elementData,index,numMove);
-        }
-        //数组尾部置空
-        elementData[--size] = null;
-        return oldValue;
+        //移动数据
+        System.arraycopy(elementData,index + 1,elementData,index,numMove);
+        return elementDatum;
     }
 
     /**
@@ -181,15 +168,10 @@ public class MyArrayList implements Serializable {
     public void list(){
         System.out.println(Arrays.toString(elementData));
     }
-
     /**
-     * 获取数组长度
-     * @return 数组长度
+     * 获取数据
      */
     public int size(){
         return this.size;
     }
-
-
-
 }
