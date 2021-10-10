@@ -94,7 +94,7 @@ public class MyArrayList implements Serializable {
         //容量判断
         ensureCapacityInternal(size + 1);
         //插入数据
-        elementData[++size] = o;
+        elementData[size++] = o;
         return true;
     }
 
@@ -158,9 +158,13 @@ public class MyArrayList implements Serializable {
         //待删除的数据后还有多少数据
         int numMove = size - index - 1;
         //移动数据
-        System.arraycopy(elementData,index + 1,elementData,index,numMove);
+        if (numMove > 0){
+            System.arraycopy(elementData,index + 1,elementData,index,numMove);
+        }
+        elementData[--size] = null;
         return elementDatum;
     }
+
 
     /**
      * 打印数据
