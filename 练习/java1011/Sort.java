@@ -14,7 +14,7 @@ public class Sort {
             arr[i] = (int) (Math.random() * 1000 + 1);
         }
         System.out.println("排序前:" + Arrays.toString(arr));
-        quickSort(arr);
+        heapSort(arr);
         System.out.println("排序后:" + Arrays.toString(arr));
     }
 
@@ -132,13 +132,29 @@ public class Sort {
         }
     }
 
+    /**
+     * 堆排序
+     * @param arr
+     */
+    public static void heapSort(int[] arr){
+        int temp = 0;
+        for (int i = arr.length / 2 - 1; i > 0; i--) {
+            adjustHeap(arr,i,arr.length);
+        }
+        for (int i = arr.length - 1; i > 0 ; i--) {
+            temp = arr[i];
+            arr[i] = arr[0];
+            arr[0] = temp;
+            adjustHeap(arr,0,i);
+        }
+    }
 
-    private static void adjustHope(int[] arr,int i,int length){
+    private static void adjustHeap(int[] arr,int i,int length){
         //取出当前元素，保存临时变量
         int temp = arr[i];
         //开始调整大顶堆
         //第一个费叶子节点 i * 2 - 1
-        for (int k = i * 2 - 1; k < length; k = k * 2 - 1){
+        for (int k = i * 2 + 1; k < length; k = k * 2 + 1){
             if ((k + 1) < length && arr[k] < arr[k + 1]){
                 k++;
             }
