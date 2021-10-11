@@ -88,13 +88,17 @@ public class Sort {
         }
     }
 
+    /**
+     * 快速排序
+     * @param arr
+     */
     public static void quickSort(int[] arr){
         quick(arr,0, arr.length - 1);
     }
 
     private static void quick(int[] arr, int left, int right){
-        int l = left;
         int r = right;
+        int l = left;
         int median = arr[(left + right) / 2];
         while (l < r){
             while (arr[l] < median){
@@ -127,4 +131,26 @@ public class Sort {
             quick(arr, left, r);
         }
     }
+
+
+    private static void adjustHope(int[] arr,int i,int length){
+        //取出当前元素，保存临时变量
+        int temp = arr[i];
+        //开始调整大顶堆
+        //第一个费叶子节点 i * 2 - 1
+        for (int k = i * 2 - 1; k < length; k = k * 2 - 1){
+            if ((k + 1) < length && arr[k] < arr[k + 1]){
+                k++;
+            }
+            if (arr[k] > temp){
+                arr[i] = arr[k];
+                i = k;
+            }else {
+                break;
+            }
+        }
+        arr[i] = temp;
+    }
+
+
 }
