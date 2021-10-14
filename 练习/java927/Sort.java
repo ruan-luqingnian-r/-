@@ -97,6 +97,7 @@ public class Sort {
         int r = right;
         int mod = arr[(left + right) / 2];
         while (l < r){
+
             while (arr[l] < mod){
                 l++;
             }
