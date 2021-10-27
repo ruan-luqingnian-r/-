@@ -61,7 +61,8 @@ public class MyArrayList implements Serializable {
         //判断是否需要扩容
         if (elementData.length - minCapacity < 0){
             //容量不足需要扩容
-            int oldCapacity =
+            int oldCapacity = elementData.length;
+            int newCapacity = oldCapacity + (oldCapacity >> 1);
         }
 
     }
