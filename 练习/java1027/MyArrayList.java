@@ -50,7 +50,7 @@ public class MyArrayList implements Serializable {
 
     /**
      * 扩容机制
-     * @param minCapacity
+     * @param minCapacity 最小容量
      */
     private void ensureCapacityInternal(int minCapacity){
         //首先判读是否是初次扩容
@@ -63,8 +63,104 @@ public class MyArrayList implements Serializable {
             //容量不足需要扩容
             int oldCapacity = elementData.length;
             int newCapacity = oldCapacity + (oldCapacity >> 1);
+            //判断扩容后是否可以使用
+            if (newCapacity - minCapacity < 0){
+                newCapacity = minCapacity;
+            }
+            //扩容完成创建新数组
+            Object[] objects = new Object[newCapacity];
+            //数据拷贝
+            System.arraycopy(elementData,0,objects,0,elementData.length);
+            //修改引用
+            elementData = objects;
         }
+    }
 
+    /**
+     * 下标检验
+     * @param index 下标值
+     */
+    private void rangeCheck(int index){
+        if (index < 0 || index > size){
+            throw new IndexOutOfBoundsException("数组越界");
+        }
+    }
+
+    /**
+     * 插入数据
+     * @param o 待插入数据
+     */
+    public void add(Object o){
+        //并发记录
+        modCount++;
+        //容量保证
+        ensureCapacityInternal(size + 1);
+        //尾部插入
+        elementData[++size] = o;
+    }
+
+    /**
+     * 根据下标获取数据
+     * @param index 下标值
+     * @return 对应数据
+     */
+    public Object get(int index){
+        rangeCheck(index);
+        return elementData[index];
+    }
+
+    /**
+     * 根据数据获取下标
+     * @param o 数据
+     * @return 对应下标
+     */
+    public int indexOf(Object o){
+        if (o == null){
+            for (int i = 0; i < elementData.length; i++) {
+                if (elementData[i] == null){
+                    return i;
+                }
+            }
+        }else {
+            for (int i = 0; i < elementData.length; i++) {
+                if (elementData[i] == o){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 修改数据
+     * @param index 待修改数据下标
+     * @param o 新数据
+     * @return 旧数据
+     */
+    public Object set(int index, Object o){
+        //并发标记
+        modCount++;
+        //下标检查
+        rangeCheck(index);
+        //保存数据
+        Object oleElement = elementData[index];
+        //修改数据
+        elementData[index] = o;
+        return oleElement;
+    }
+
+    /**
+     * 删除数据
+     * @param index 要删除数据的下标
+     * @return 旧数据
+     */
+    public Object del(int index){
+        //并发标记
+        modCount++;
+        //下标检查
+        rangeCheck(index);
+        //保存数据
+        Object oleElement = elementData[index];
     }
 
 }
