@@ -1,6 +1,7 @@
 package 练习.java1027;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * @Author: ruan
@@ -161,6 +162,27 @@ public class MyArrayList implements Serializable {
         rangeCheck(index);
         //保存数据
         Object oleElement = elementData[index];
+        //计算待删除数据后面还有多少数据
+        int munMove = size - index - 1;
+        if (munMove > 0){
+            //数据移动
+            System.arraycopy(elementData,index + 1,elementData,index,munMove);
+        }
+        //尾部置空
+        elementData[--size] = null;
+        return oleElement;
+    }
+
+    /**
+     * 数组大小
+     * @return 数组大小
+     */
+    public int size(){
+        return this.size;
+    }
+
+    public void list(){
+        System.out.println(Arrays.toString(elementData));
     }
 
 }
