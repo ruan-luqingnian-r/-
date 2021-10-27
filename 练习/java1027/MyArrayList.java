@@ -42,8 +42,27 @@ public class MyArrayList implements Serializable {
         if (initialCapacity == 0){
             this.elementData = EMPTY_ELEMENT_DATA;
         }else if (initialCapacity > 0){
-
+            this.elementData = new Object[initialCapacity];
+        }else {
+            throw new IllegalArgumentException("非法数据");
         }
+    }
+
+    /**
+     * 扩容机制
+     * @param minCapacity
+     */
+    private void ensureCapacityInternal(int minCapacity){
+        //首先判读是否是初次扩容
+        if (elementData == EMPTY_ELEMENT_DATA){
+            //是首次扩容
+            minCapacity = Math.max(minCapacity,DEFAULT_CAPACITY);
+        }
+        //判断是否需要扩容
+        if (elementData.length - minCapacity < 0){
+            //容量不足需要扩容
+        }
+
     }
 
 }
