@@ -97,7 +97,7 @@ public class MyArrayList implements Serializable {
         //容量保证
         ensureCapacityInternal(size + 1);
         //尾部插入
-        elementData[++size] = o;
+        elementData[size++] = o;
     }
 
     /**
